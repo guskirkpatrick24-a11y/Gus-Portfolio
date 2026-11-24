@@ -1,0 +1,338 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>All Projects — Gus Kirkpatrick</title>
+<meta name="description" content="Every project by Gus Kirkpatrick, newest first.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Space+Grotesk:wght@500;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:oklch(16% .01 280);
+  --surface:oklch(21% .015 280);
+  --border:oklch(32% .02 280);
+  --fg:oklch(96% .005 280);
+  --muted:oklch(72% .02 280);
+  --primary:oklch(70% .18 295);
+  --accent:oklch(80% .13 210);
+  --ease:cubic-bezier(.2,.7,.2,1);
+  --display:"Space Grotesk",Inter,ui-sans-serif,system-ui,sans-serif;
+}
+*,*::before,*::after{box-sizing:border-box}
+html{scroll-behavior:smooth;scroll-padding-top:5rem}
+body{margin:0;background:var(--bg);color:var(--fg);font:16px/1.5 Inter,ui-sans-serif,system-ui,sans-serif;-webkit-font-smoothing:antialiased}
+img,video{display:block;max-width:100%}
+a{color:inherit;text-decoration:none}
+h1,h2,h3{font-family:var(--display);margin:0;letter-spacing:-.025em;line-height:1.1}
+p{margin:0}
+ul{list-style:none;margin:0;padding:0}
+button{font:inherit;color:inherit;background:none;border:0;cursor:pointer}
+.sr-only{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
+.skip{position:fixed;left:.75rem;top:-4rem;z-index:60;background:var(--primary);color:var(--bg);padding:.5rem 1rem;border-radius:.375rem;transition:top .2s}
+.skip:focus{top:.75rem}
+:focus-visible{outline:2px solid var(--accent);outline-offset:3px;border-radius:6px}
+
+.wrap{max-width:80rem;margin:0 auto;padding:0 1rem}
+@media(min-width:640px){.wrap{padding:0 1.5rem}}
+@media(min-width:1024px){.wrap{padding:0 2rem}}
+
+/* Header */
+header{position:fixed;inset:0 0 auto;z-index:50;border-bottom:1px solid color-mix(in oklch,var(--border) 60%,transparent);background:color-mix(in oklch,var(--bg) 80%,transparent);backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px)}
+nav{height:4rem;display:flex;align-items:center;justify-content:space-between}
+.brand{display:flex;align-items:center;gap:.75rem;font-family:var(--display);font-weight:700}
+.brand svg{height:2rem;width:auto;color:var(--muted);transition:color .2s}
+.brand:hover svg{color:var(--primary)}
+.navlinks{display:flex;gap:.25rem}
+.navlinks a{padding:.5rem .75rem;border-radius:.375rem;font-size:.875rem;font-weight:500;color:var(--muted);transition:background .2s,color .2s}
+.navlinks a:hover{background:var(--surface);color:var(--fg)}
+.menu-btn{display:none;padding:.5rem;border-radius:.375rem;color:var(--muted)}
+.menu-btn:hover{background:var(--surface);color:var(--fg)}
+@media(max-width:639px){
+  .menu-btn{display:block}
+  .navlinks{display:none;position:absolute;top:4rem;left:0;right:0;flex-direction:column;padding:.5rem 1rem 1rem;background:var(--bg);border-bottom:1px solid var(--border)}
+  .navlinks.open{display:flex}
+}
+
+/* Hero */
+.hero{position:relative;padding:4.75rem .75rem 0;user-select:none}
+.hero-stage{position:relative;height:calc(100svh - 6rem);min-height:30rem;overflow:hidden;border-radius:1.5rem;background:var(--surface);cursor:grab;touch-action:pan-y}
+.hero-stage:active{cursor:grabbing}
+.hero-backdrop{position:absolute;inset:0;transform:translate3d(calc(var(--mx,0) * -14px),calc(var(--my,0) * -10px),0) scale(1.04);transition:transform .8s var(--ease)}
+.hero-slide{position:absolute;inset:0;opacity:0;transition:opacity 1.2s}
+.hero-slide.is-active{opacity:1}
+.hero-photo{width:100%;height:100%;object-fit:cover;background:linear-gradient(135deg,oklch(30% .08 295),oklch(22% .05 220))}
+.hero-slide.is-active .hero-photo{animation:zoom 7.5s linear both}
+.hero-stage.is-paused .hero-slide.is-active .hero-photo{animation-play-state:paused}
+@keyframes zoom{to{transform:scale(1.08)}}
+.shade1{position:absolute;inset:0;pointer-events:none;background:radial-gradient(ellipse at center,rgb(0 0 0/.65),rgb(0 0 0/.45),rgb(0 0 0/.25))}
+.shade2{position:absolute;inset:auto 0 0;height:33%;pointer-events:none;background:linear-gradient(to top,rgb(0 0 0/.7),transparent)}
+.hero-headline{position:absolute;inset:0;display:grid;place-items:center;padding:0 1.5rem;text-align:center;pointer-events:none}
+.hero-depth{max-width:56rem;transform:translate3d(calc(var(--mx,0) * 10px),calc(var(--my,0) * 6px),0);transition:transform .8s var(--ease)}
+.hero h1{font-size:3rem;font-weight:700;color:#fff;line-height:1}
+@media(min-width:640px){.hero h1{font-size:4.5rem}}
+@media(min-width:1024px){.hero h1{font-size:6rem}}
+.letter{display:inline-block;animation:letter .7s var(--ease) both;animation-delay:calc(.2s + var(--i) * 45ms)}
+@keyframes letter{from{opacity:0;filter:blur(6px);transform:translateY(.35em) rotate(4deg)}}
+.hero-sub{margin-top:1rem;display:grid;font-family:var(--display);font-size:1.5rem;line-height:1.2;font-weight:700;letter-spacing:.2em;text-transform:uppercase;color:rgb(255 255 255/.9)}
+@media(min-width:640px){.hero-sub{font-size:2.25rem}}
+.hero-sub span{grid-area:1/1;transition:opacity .6s,transform .6s var(--ease),filter .6s}
+.hero-sub span:not(.on){opacity:0;transform:translateY(.5em);filter:blur(6px)}
+.hero-caption{margin-top:1.25rem;font-size:.8rem;letter-spacing:.2em;text-transform:uppercase;color:rgb(255 255 255/.6);min-height:1.2em;transition:opacity .5s}
+.hero-scroll{position:absolute;right:1.5rem;bottom:1.5rem;display:none;align-items:center;gap:.5rem;font-size:.75rem;font-weight:500;letter-spacing:.2em;text-transform:uppercase;color:rgb(255 255 255/.7);transition:color .2s}
+.hero-scroll:hover{color:#fff}
+.hero-scroll svg{animation:bob 1.8s ease-in-out infinite}
+@keyframes bob{50%{transform:translateY(4px)}}
+@media(min-width:640px){.hero-scroll{display:flex}}
+.dots{position:absolute;inset:auto 0 1.5rem;display:flex;justify-content:center;gap:.5rem;padding:0 1.5rem}
+.dot{display:grid;place-items:center;height:2rem;width:3rem}
+@media(min-width:640px){.dot{width:4rem}}
+.dot span{position:relative;height:4px;width:100%;overflow:hidden;border-radius:999px;background:rgb(255 255 255/.3)}
+.dot:hover span{background:rgb(255 255 255/.5)}
+.dot i{position:absolute;inset:0 auto 0 0;width:0;border-radius:999px;background:#fff}
+@supports (animation-timeline:view()){
+  @media (prefers-reduced-motion:no-preference){
+    .hero-stage{view-timeline:--hero block;animation:recede linear both;animation-timeline:--hero;animation-range:exit}
+    .hero-headline{animation:lift linear both;animation-timeline:--hero;animation-range:exit exit 55%}
+  }
+}
+@keyframes recede{to{opacity:.45;transform:scale(.93)}}
+@keyframes lift{to{opacity:0;transform:translateY(-12vh)}}
+
+/* Sections */
+section.block{padding-top:6rem}
+#featured{padding-top:3rem}
+.h2{text-align:center;font-size:2.25rem;font-weight:700}
+@media(min-width:640px){.h2{font-size:3rem}}
+.lede{margin-top:.5rem;text-align:center;font-size:1.25rem;color:var(--muted)}
+.eyebrow{font-size:.75rem;font-weight:600;letter-spacing:.1em;text-transform:uppercase;color:var(--primary)}
+.role{font-weight:500;color:var(--accent)}
+.muted{color:var(--muted)}
+
+.card{display:flex;flex-direction:column;overflow:hidden;border:1px solid var(--border);border-radius:1rem;background:var(--surface);transition:transform .3s var(--ease),border-color .3s,box-shadow .3s}
+a.card:hover,a.feature:hover{border-color:color-mix(in oklch,var(--primary) 60%,transparent);box-shadow:0 20px 25px -5px color-mix(in oklch,var(--primary) 10%,transparent),0 8px 10px -6px color-mix(in oklch,var(--primary) 10%,transparent)}
+a.card:hover{transform:translateY(-4px)}
+.card .media,.feature .media{overflow:hidden;background:linear-gradient(135deg,oklch(28% .07 295),oklch(22% .05 220))}
+.card img,.feature img{width:100%;height:100%;object-fit:cover;transition:transform .5s}
+.card .media{aspect-ratio:16/9}
+a.card:hover img{transform:scale(1.04)}
+a .title{transition:color .2s}
+a:hover .title{color:var(--primary)}
+.card .body{flex:1;display:flex;flex-direction:column;padding:1.25rem}
+@media(min-width:640px){.card .body{padding:1.5rem}}
+.card h3{margin-top:.25rem;font-size:1.5rem}
+.card .role{margin-top:.25rem;font-size:.875rem}
+.card .desc{margin-top:.75rem;color:var(--muted);display:-webkit-box;-webkit-line-clamp:3;-webkit-box-orient:vertical;overflow:hidden}
+.meta{margin-top:auto;padding-top:1.25rem;display:flex;align-items:center;justify-content:space-between;gap:1rem;font-size:.875rem}
+.meta .k{color:color-mix(in oklch,var(--muted) 80%,transparent)}
+.arrow{display:inline-flex;align-items:center;gap:.375rem;font-weight:500;transition:color .2s}
+a:hover .arrow{color:var(--primary)}
+.arrow svg{transition:transform .2s}
+a:hover .arrow svg{transform:translateX(3px)}
+
+.feature{margin-top:3rem;display:grid;overflow:hidden;border:1px solid var(--border);border-radius:1rem;background:var(--surface);transition:border-color .3s,box-shadow .3s}
+@media(min-width:1024px){.feature{grid-template-columns:minmax(0,1.25fr) minmax(0,1fr)}}
+.feature .media{aspect-ratio:16/10}
+@media(min-width:1024px){.feature .media{aspect-ratio:auto;min-height:24rem}}
+.feature:hover img{transform:scale(1.03)}
+.feature .body{display:flex;flex-direction:column;padding:1.5rem}
+@media(min-width:640px){.feature .body{padding:2rem}}
+.feature .eyebrow{font-size:.875rem}
+.feature h3{margin-top:.5rem;font-size:1.875rem}
+@media(min-width:640px){.feature h3{font-size:2.25rem}}
+.feature .role{margin-top:.5rem}
+.feature .desc{margin-top:1rem;font-size:1.125rem;color:var(--muted)}
+.stats{margin-top:1.5rem;display:grid;grid-template-columns:repeat(3,1fr);gap:.75rem}
+.stat{border:1px solid var(--border);border-radius:.75rem;padding:.75rem;background:color-mix(in oklch,var(--bg) 50%,transparent)}
+.stat b{display:block;font-family:var(--display);font-size:1.5rem;line-height:1.1;color:var(--fg)}
+.stat-badge{display:grid;place-items:center}
+.stat-badge img{height:5.25rem;width:auto;transition:transform .3s var(--ease),filter .3s;filter:drop-shadow(0 0 10px rgb(255 255 255/.35)) drop-shadow(0 0 22px rgb(167 139 250/.35));animation:badgeGlow 3s ease-in-out infinite}
+@keyframes badgeGlow{50%{filter:drop-shadow(0 0 14px rgb(255 255 255/.5)) drop-shadow(0 0 30px rgb(167 139 250/.5))}}
+a.feature:hover .stat-badge img{transform:scale(1.05)}
+.stat small{font-size:.75rem;color:var(--muted)}
+
+.grid2{margin-top:1.5rem;display:grid;gap:1.5rem}
+@media(min-width:768px){.grid2{grid-template-columns:repeat(2,1fr)}}
+@media(min-width:1024px){.grid3{grid-template-columns:repeat(3,1fr)}}
+
+/* Filters */
+.filters{margin-top:2rem;display:flex;flex-wrap:wrap;justify-content:center;gap:.5rem}
+.chip{padding:.4rem .9rem;border-radius:999px;border:1px solid var(--border);font-size:.875rem;font-weight:500;color:var(--muted);transition:all .2s}
+.chip:hover{color:var(--fg);border-color:var(--muted)}
+.chip[aria-pressed="true"]{background:var(--primary);border-color:var(--primary);color:var(--bg)}
+.all .card .media{aspect-ratio:4/3}
+.all .card h3{font-size:1.25rem}
+.card.is-hidden{display:none}
+
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:.5rem;padding:.75rem 1.5rem;border-radius:999px;font-weight:500;transition:color .2s,background .2s,border-color .2s}
+.btn-lg{padding:1rem 2.25rem;font-size:1.125rem}
+.btn-lg svg{transition:transform .2s}
+.btn-lg:hover svg{transform:translateX(3px)}
+.btn-ghost{border:1px solid var(--border);color:var(--fg)}
+.btn-ghost:hover{border-color:var(--accent);color:var(--accent)}
+.btn-primary{background:var(--primary);color:var(--bg)}
+.btn-primary:hover{background:var(--accent)}
+.center{margin-top:2.5rem;display:flex;justify-content:center;gap:.75rem;flex-wrap:wrap}
+
+/* About */
+.about{max-width:64rem}
+.about-row{margin-top:3rem;display:flex;flex-direction:column;align-items:center;gap:2.5rem}
+@media(min-width:768px){.about-row{flex-direction:row;align-items:flex-start}}
+.about-text{font-size:1.125rem;color:var(--muted)}
+.about-text p+p{margin-top:1rem}
+.about-text strong{color:var(--fg);font-weight:600}
+.portrait{width:16rem;flex-shrink:0}
+@media(min-width:640px){.portrait{width:18rem}}
+@media(min-width:1024px){.portrait{width:20rem}}
+.portrait img{aspect-ratio:4/5;width:100%;object-fit:cover;border-radius:1rem;border:4px solid var(--primary);background:var(--surface)}
+.subhead{margin-top:2rem;font-family:var(--display);font-size:1rem;font-weight:700;letter-spacing:.15em;text-transform:uppercase;color:var(--fg)}
+.tags{margin-top:.75rem;display:flex;flex-wrap:wrap;gap:.5rem}
+.tag{padding:.35rem .8rem;border-radius:999px;background:var(--surface);border:1px solid var(--border);font-size:.875rem;color:var(--fg)}
+.tag.alt{color:var(--accent)}
+
+/* Logos conveyor */
+.strip{margin-top:1.5rem;background:var(--surface);padding:1.5rem 0 .75rem;overflow:hidden}
+.strip>p{text-align:center;font-size:1.25rem;font-weight:600;letter-spacing:.2em;text-transform:uppercase;color:var(--muted)}
+.belt{margin-top:-.5rem;padding:1.75rem 0 1rem;position:relative;-webkit-mask-image:linear-gradient(90deg,transparent,#000 8%,#000 92%,transparent);mask-image:linear-gradient(90deg,transparent,#000 8%,#000 92%,transparent)}
+.track{display:flex;width:max-content;animation:belt 80s linear infinite}
+@keyframes belt{from{transform:translateX(-50%)}to{transform:translateX(0)}}
+.co{flex:0 0 auto;width:13rem;margin:0 .75rem;text-align:center}
+.tile{height:4.75rem;display:grid;place-items:center;padding:.25rem}
+.tile img{max-height:3.25rem;max-width:100%;object-fit:contain;transition:transform .3s var(--ease),filter .3s}
+.tile.sq img{max-height:4.25rem}
+.co[data-co="muxr"] .tile img{max-width:80%}
+.co[data-co="darpa"] .tile img{filter:brightness(2.1) saturate(1.6)}
+.co[data-co="darpa"]:hover .tile img{filter:brightness(2.1) saturate(1.6) drop-shadow(0 0 14px color-mix(in srgb,var(--glow) 70%,transparent)) drop-shadow(0 8px 24px color-mix(in srgb,var(--glow) 45%,transparent))}
+.co:hover .tile img{transform:translateY(-4px) scale(1.05);filter:drop-shadow(0 0 14px color-mix(in srgb,var(--glow,#a78bfa) 70%,transparent)) drop-shadow(0 8px 24px color-mix(in srgb,var(--glow,#a78bfa) 45%,transparent))}
+.co-link{display:block;color:inherit;text-decoration:none}
+.co b{display:block;margin-top:.5rem;font-family:var(--display);font-size:1.05rem;color:var(--fg)}
+.co small{display:block;margin-top:.15rem;font-size:.7rem;font-weight:500;letter-spacing:.1em;text-transform:uppercase;color:var(--accent)}
+@media (prefers-reduced-motion:reduce){.belt{overflow-x:auto}.track{animation:none}}
+
+/* Contact dropdown */
+.contact{max-width:40rem}
+.dd{margin-top:2.5rem;border:1px solid var(--border);border-radius:1.25rem;background:var(--surface);overflow:hidden;transition:border-color .3s,box-shadow .3s}
+.dd.open{border-color:color-mix(in oklch,var(--primary) 60%,transparent);box-shadow:0 20px 40px -15px color-mix(in oklch,var(--primary) 25%,transparent)}
+.dd-toggle{width:100%;display:flex;align-items:center;justify-content:space-between;gap:1rem;padding:1.25rem 1.5rem;text-align:left}
+.dd-toggle b{font-family:var(--display);font-size:1.25rem}
+.dd-toggle span.sub{display:block;font-size:.875rem;color:var(--muted)}
+.dd-toggle .chev{flex-shrink:0;display:grid;place-items:center;width:2.5rem;height:2.5rem;border-radius:999px;background:var(--primary);color:var(--bg);transition:transform .4s var(--ease),background .2s}
+.dd.open .chev{transform:rotate(180deg)}
+.dd-toggle:hover .chev{background:var(--accent)}
+.dd-panel{display:grid;grid-template-rows:0fr;transition:grid-template-rows .5s var(--ease)}
+.dd.open .dd-panel{grid-template-rows:1fr}
+.dd-panel>ul{overflow:hidden}
+.c-link{display:flex;align-items:center;gap:1rem;width:100%;padding:1rem 1.5rem;border-top:1px solid var(--border);text-align:left;transition:background .2s}
+.c-link:hover{background:color-mix(in oklch,var(--bg) 60%,transparent)}
+.dd-panel li:first-child .c-link{border-top:0}
+.c-link img{width:2.5rem;height:2.5rem;object-fit:contain;flex-shrink:0;transition:transform .3s var(--ease)}
+.c-link:hover img{transform:scale(1.1) rotate(-4deg)}
+.c-link b{display:block;font-family:var(--display);font-size:1.05rem}
+.c-link span{font-size:.875rem;color:var(--muted);word-break:break-all}
+.c-link .go{margin-left:auto;color:var(--muted);transition:color .2s,transform .2s}
+.c-link:hover .go{color:var(--primary);transform:translateX(3px)}
+.copy-note{margin-left:auto;font-size:.75rem;font-weight:600;color:var(--accent);opacity:0;transition:opacity .2s}
+.copy-note.show{opacity:1}
+
+footer{margin-top:6rem;border-top:1px solid color-mix(in oklch,var(--border) 60%,transparent)}
+.foot{display:flex;flex-direction:column;gap:1rem;padding-top:2rem;padding-bottom:2rem;font-size:.875rem;color:var(--muted)}
+@media(min-width:640px){.foot{flex-direction:row;align-items:center;justify-content:space-between}}
+.foot ul{display:flex;flex-wrap:wrap;gap:.5rem 1.5rem}
+.foot a:hover{color:var(--fg)}
+
+/* Reveal */
+.reveal{opacity:0;transform:translateY(1.75rem) scale(.98);transition:opacity .7s ease-out,transform .8s var(--ease);transition-delay:var(--d,0ms)}
+.reveal.is-visible{opacity:1;transform:none}
+@media (prefers-reduced-motion:reduce){
+  *,*::before,*::after{animation:none!important;transition:none!important}
+  .reveal{opacity:1;transform:none}
+  .hero-backdrop,.hero-depth{transform:none}
+}
+
+.yr-wrap{max-width:80rem;margin:0 auto;padding:7rem 1rem 0}
+@media(min-width:640px){.yr-wrap{padding-left:1.5rem;padding-right:1.5rem}}
+@media(min-width:1024px){.yr-wrap{padding-left:2rem;padding-right:2rem}}
+.yr-wrap>header{position:static;border:0;background:none;backdrop-filter:none;-webkit-backdrop-filter:none}
+.yr-wrap h1{font-size:2.25rem;font-weight:700}
+@media(min-width:640px){.yr-wrap h1{font-size:3rem}}
+.yr-wrap .intro{margin-top:.75rem;max-width:36rem;font-size:.875rem;color:var(--muted)}
+.years{margin-top:3rem;display:grid;gap:3rem}
+.yhead{margin-bottom:1.25rem;display:flex;align-items:center;gap:.75rem}
+.yhead h2{font-family:Inter,sans-serif;font-size:1.125rem;font-weight:500;letter-spacing:0;color:var(--muted)}
+.yhead .line{flex:1;height:1px;background:color-mix(in oklch,var(--border) 50%,transparent)}
+.yhead .count{font-size:.75rem;color:color-mix(in oklch,var(--muted) 70%,transparent)}
+.ygrid{display:grid;gap:1.5rem}
+@media(min-width:640px){.ygrid{grid-template-columns:repeat(2,1fr)}}
+@media(min-width:1024px){.ygrid{grid-template-columns:repeat(3,1fr)}}
+.ycard{display:flex;flex-direction:column;height:100%;overflow:hidden;border:1px solid var(--border);border-radius:1rem;background:var(--surface);transition:transform .3s var(--ease),border-color .3s,box-shadow .3s}
+a.ycard:hover{transform:translateY(-4px);border-color:color-mix(in oklch,var(--primary) 60%,transparent);box-shadow:0 20px 25px -5px color-mix(in oklch,var(--primary) 10%,transparent)}
+.ycard .media{position:relative;overflow:hidden;aspect-ratio:16/9;background:linear-gradient(135deg,oklch(28% .07 295),oklch(22% .05 220))}
+.ycard .media img{width:100%;height:100%;object-fit:cover;transition:scale .7s ease-out}
+a.ycard:hover .media img{scale:1.04}
+.badge{position:absolute;top:.75rem;left:.75rem;padding:.25rem .65rem;border-radius:999px;background:rgb(0 0 0/.6);backdrop-filter:blur(6px);font-size:11px;font-weight:500;letter-spacing:.03em;color:rgb(255 255 255/.9)}
+.ycard .body{flex:1;display:flex;flex-direction:column;padding:1.25rem}
+@media(min-width:640px){.ycard .body{padding:1.5rem}}
+.ycard h3{margin-top:.375rem;font-size:1.25rem;font-weight:700;transition:color .2s}
+@media(min-width:640px){.ycard h3{font-size:1.5rem}}
+a.ycard:hover h3{color:var(--primary)}
+.ycard .role{margin-top:.25rem;font-size:.875rem}
+.ycard .desc{margin:.75rem 0 1rem;font-size:.875rem;color:var(--muted);display:-webkit-box;-webkit-line-clamp:3;-webkit-box-orient:vertical;overflow:hidden}
+.ycard .foot{margin-top:auto;display:flex;align-items:center;justify-content:space-between;gap:1rem;min-height:2.1rem;padding-top:1rem;border-top:1px solid color-mix(in oklch,var(--border) 60%,transparent);font-size:.75rem;color:color-mix(in oklch,var(--muted) 80%,transparent)}
+.ycard .go{color:var(--fg);transition:transform .2s,color .2s}
+a.ycard:hover .go{transform:translateX(4px);color:var(--primary)}
+</style>
+</head>
+<body>
+<a href="#main" class="skip">Skip to content</a>
+<header>
+  <nav class="wrap" aria-label="Main">
+    <a href="../index.html" class="brand" aria-label="Gus Kirkpatrick — home">
+      <svg viewBox="0 0 64 40" fill="none" stroke="currentColor" stroke-width="4" aria-hidden="true"><path d="M26 6H6v28h20V21H16"/><path d="M36 4v32M36 22L58 4M43 16l15 20"/></svg>
+      <span>Gus Kirkpatrick</span>
+    </a>
+    <button class="menu-btn" aria-expanded="false" aria-controls="navlinks" aria-label="Open main menu">
+      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M4 7h16M4 12h16M4 17h16"/></svg>
+    </button>
+    <div class="navlinks" id="navlinks">
+      <a href="../index.html#featured">Featured</a>
+      <a href="index.html">All Projects</a>
+      <a href="../index.html#about-me">About</a>
+      <a href="../index.html#contact">Contact / Resume</a>
+    </div>
+  </nav>
+</header>
+<main id="main"><div class="yr-wrap">
+  <header><h1>All Projects</h1><p class="intro">Newest first — UEFN maps, contracts, levels, game jams and school projects.</p></header>
+  <div class="years"><section aria-labelledby="year-2026"><div class="yhead"><h2 id="year-2026">2026</h2><span class="line"></span><span class="count">2 projects</span></div><ul class="ygrid"><li class="reveal" style="--d:0ms"><a class="ycard" href="shell-shocked.html"><div class="media"><img src="../images/shell-shocked/key-art.jpg" alt="" loading="lazy"></div><div class="body"><p class="eyebrow">Creators Corp × EA / DICE</p><h3>Battlefield 6: Shell Shocked</h3><p class="role">Lead Level Designer</p><p class="desc">Lead level designer on a 4 vs 28 holdout mode for Battlefield 6 Portal, with EA/DICE and TheBurntPeanut — 30.1M campaign views.</p><div class="foot"><span>2026</span><span class="go" aria-hidden="true">→</span></div></div></a></li><li class="reveal" style="--d:80ms"><div class="ycard"><div class="media"><img src="https://static.wixstatic.com/media/5a5567_6be4519968184cd69b80ab6b84c5cee5~mv2.jpg/v1/fill/w_800,h_450,al_c,q_85,enc_auto/img.jpg" alt="" loading="lazy"></div><div class="body"><p class="eyebrow">Internship</p><h3>Sony IMS</h3><p class="role">Gaming Internship</p><p class="desc">Gaming internship with Sony IMS.</p><div class="foot"><span>2026</span></div></div></div></li></ul></section><section aria-labelledby="year-2025"><div class="yhead"><h2 id="year-2025">2025</h2><span class="line"></span><span class="count">4 projects</span></div><ul class="ygrid"><li class="reveal" style="--d:0ms"><a class="ycard" href="fort-souls.html"><div class="media"><img src="https://static.wixstatic.com/media/5a5567_335d91443b2d48868f64bbb5ad2ca55a~mv2.png/v1/fill/w_800,h_450,al_c,q_85,enc_auto/img.png" alt="" loading="lazy"></div><div class="body"><p class="eyebrow">Fortnite Open World RPG</p><h3>Fort Souls: Boss Fight</h3><p class="role">Game Designer &amp; Product Manager</p><p class="desc">Fort Souls is my largest video game project to date: 672k plays, 115 million impressions and a feature from Epic Games on the Fortnite home page.</p><div class="foot"><span>Jul 2024 – Present</span><span class="go" aria-hidden="true">→</span></div></div></a></li><li class="reveal" style="--d:80ms"><a class="ycard" href="pubg-mobile.html"><div class="media"><img src="https://static.wixstatic.com/media/5a5567_fb293fd93c42444a8b084ec507ff0584~mv2.jpeg/v1/fill/w_800,h_450,al_c,q_85,enc_auto/img.jpeg" alt="" loading="lazy"></div><div class="body"><p class="eyebrow">Tencent America × Future Trash Inc.</p><h3>PUBG Mobile: Snipers vs Runners</h3><p class="role">Game Designer &amp; Level Designer</p><p class="desc">Mastered a new editor to ship &quot;Snipers vs Runners&quot; while writing documentation and filming dev logs for the PUBG Editor.</p><div class="foot"><span>Aug – Oct 2025</span><span class="go" aria-hidden="true">→</span></div></div></a></li><li class="reveal" style="--d:160ms"><a class="ycard" href="agency-assault.html"><div class="media"><img src="https://static.wixstatic.com/media/5a5567_9e4c4a8134874eccbab2fa2bf40b310b~mv2.png/v1/fill/w_800,h_450,al_c,q_85,enc_auto/img.png" alt="" loading="lazy"></div><div class="body"><p class="eyebrow">Fortnite Roguelike Shooter</p><h3>Agency Assault [RL]</h3><p class="role">Level &amp; Encounter Designer</p><p class="desc">Players shoot their way through 25 unique areas to steal secret technology from the evil &quot;Agency&quot; — one of my proudest level design projects.</p><div class="foot"><span>Oct 2024 – Feb 2025</span><span class="go" aria-hidden="true">→</span></div></div></a></li><li class="reveal" style="--d:0ms"><a class="ycard" href="uefn-freelance.html"><div class="media"><img src="https://static.wixstatic.com/media/5a5567_4098054c695e4513abc4f39df14f9d67~mv2.png/v1/fill/w_800,h_450,al_c,q_85,enc_auto/img.png" alt="" loading="lazy"></div><div class="body"><p class="eyebrow">2+ years of contracts</p><h3>UEFN Freelance Work &amp; QA</h3><p class="role">Game Designer &amp; Artist</p><p class="desc">Contracts with creators and studios in various roles for companies like Sony Music, FOAD, Creators Corp and Neighbor FN.</p><div class="foot"><span>Late 2023 – Present</span><span class="go" aria-hidden="true">→</span></div></div></a></li></ul></section><section aria-labelledby="year-2024"><div class="yhead"><h2 id="year-2024">2024</h2><span class="line"></span><span class="count">6 projects</span></div><ul class="ygrid"><li class="reveal" style="--d:0ms"><a class="ycard" href="pursuit-of-laughter.html"><div class="media"><img src="https://static.wixstatic.com/media/5a5567_ddee7d42744848e99a2b62c5d7addcc4~mv2.png/v1/fill/w_800,h_450,al_c,q_85,enc_auto/img.png" alt="" loading="lazy"></div><div class="body"><p class="eyebrow">UE5 Roguelike</p><h3>Pursuit of Laughter</h3><p class="role">Level Designer, Creative Director, Environment &amp; Technical Artist</p><p class="desc">A multiplayer, procedurally generated 3D roguelike built in Unreal Engine 5 for Steam.</p><div class="foot"><span>January 2024</span><span class="go" aria-hidden="true">→</span></div></div></a></li><li class="reveal" style="--d:80ms"><a class="ycard" href="rattington-shipyard.html"><div class="media"><img src="https://static.wixstatic.com/media/5a5567_92f58121a4a14d1a8f452fe11a98fe95~mv2.png/v1/fill/w_800,h_450,al_c,q_85,enc_auto/img.png" alt="" loading="lazy"></div><div class="body"><p class="eyebrow">Level blockout</p><h3>Rattington Shipyard</h3><p class="role">Solo Level Designer</p><p class="desc">WTP Level 2: a Unity blockout mission for my Winnie the Pooh–inspired boomer shooter.</p><div class="foot"><span>January 2024</span><span class="go" aria-hidden="true">→</span></div></div></a></li><li class="reveal" style="--d:160ms"><a class="ycard" href="tactickle-squad.html"><div class="media"><img src="https://static.wixstatic.com/media/5a5567_faae6187d5c941f88e00c4c25a6c37ea~mv2.png/v1/fill/w_800,h_450,al_c,q_85,enc_auto/img.png" alt="" loading="lazy"></div><div class="body"><p class="eyebrow">Game jam winner</p><h3>Tactickle Squad</h3><p class="role">Level Designer</p><p class="desc">The winning game of the University of Cincinnati IGDA Global Game Jam.</p><div class="foot"><span>January 2024</span><span class="go" aria-hidden="true">→</span></div></div></a></li><li class="reveal" style="--d:0ms"><a class="ycard" href="stratagem.html"><div class="media"><img src="https://static.wixstatic.com/media/5a5567_d44869bd67a8427b89a76ccd2f06b343~mv2.jpg/v1/fill/w_800,h_450,al_c,q_85,enc_auto/img.jpg" alt="" loading="lazy"></div><div class="body"><p class="eyebrow">Arcade game</p><h3>Stratagem</h3><p class="role">2D Level Designer &amp; Game Designer</p><p class="desc">A sci-fi arcade game for Steam and Miami University&#x27;s arcade machine.</p><div class="foot"><span>January 2024</span><span class="go" aria-hidden="true">→</span></div></div></a></li><li class="reveal" style="--d:80ms"><div class="ycard"><div class="media"><img src="https://static.wixstatic.com/media/5a5567_1bc18b646a6944bfa4538b71c22a2dae~mv2.jpeg/v1/fill/w_800,h_450,al_c,q_85,enc_auto/img.jpeg" alt="" loading="lazy"></div><div class="body"><p class="eyebrow">Fortnite Tycoon</p><h3>Road King Tycoon</h3><p class="role">UEFN Developer</p><p class="desc">A ~$90k Fortnite tycoon map — the project that started my UEFN contract work after GDC.</p><div class="foot"><span>2024</span></div></div></div></li><li class="reveal" style="--d:160ms"><div class="ycard"><div class="media"><img src="https://static.wixstatic.com/media/5a5567_14ea5b6973214d4da961b65defbab7b0~mv2.png/v1/fill/w_800,h_450,al_c,q_85,enc_auto/img.png" alt="" loading="lazy"></div><div class="body"><p class="eyebrow">Puzzle platformer</p><h3>To Aeris</h3><p class="role">Unity</p><p class="desc">A Unity puzzle platformer.</p><div class="foot"><span>2024</span></div></div></div></li></ul></section><section aria-labelledby="year-2023"><div class="yhead"><h2 id="year-2023">2023</h2><span class="line"></span><span class="count">6 projects</span></div><ul class="ygrid"><li class="reveal" style="--d:0ms"><a class="ycard" href="dod-darpa-research.html"><div class="media"><img src="https://static.wixstatic.com/media/5a5567_8985df8a1f3f48baac76864022d1fd65~mv2.jpg/v1/fill/w_800,h_450,al_c,q_85,enc_auto/img.jpg" alt="" loading="lazy"></div><div class="body"><p class="eyebrow">Research &amp; consulting</p><h3>DOD / DARPA QA &amp; Games Research</h3><p class="role">Researcher &amp; Consultant</p><p class="desc">Ethnographic and QA research into gamification with the US Department of Defense through DARPA.</p><div class="foot"><span>2022 – 2023</span><span class="go" aria-hidden="true">→</span></div></div></a></li><li class="reveal" style="--d:80ms"><a class="ycard" href="hundred-acre-wood.html"><div class="media"><img src="https://static.wixstatic.com/media/5a5567_745a3879e4c64d5e816dbc07754191b2~mv2.png/v1/fill/w_800,h_450,al_c,q_85,enc_auto/img.png" alt="" loading="lazy"></div><div class="body"><p class="eyebrow">FPS level</p><h3>The Hundred Acre Wood</h3><p class="role">Solo Level Designer</p><p class="desc">WTP Level 1: a Unity FPS demo level set in the Winnie the Pooh universe.</p><div class="foot"><span>September 2023</span><span class="go" aria-hidden="true">→</span></div></div></a></li><li class="reveal" style="--d:160ms"><a class="ycard" href="winnie-the-pooh-animation.html"><div class="media"><img src="https://static.wixstatic.com/media/5a5567_80520a34526e4ab2a6fdc752bb12325c~mv2.png/v1/fill/w_800,h_450,al_c,q_85,enc_auto/img.png" alt="" loading="lazy"></div><div class="body"><p class="eyebrow">Animation</p><h3>Winnie the Pooh Commits Industrial Sabotage</h3><p class="role">Narrative, Animation, Modeling, VO &amp; Sound</p><p class="desc">A Maya trailer for a hypothetical Doom-like FPS.</p><div class="foot"><span>December 2023</span><span class="go" aria-hidden="true">→</span></div></div></a></li><li class="reveal" style="--d:0ms"><a class="ycard" href="terraria-modding.html"><div class="media"><img src="https://static.wixstatic.com/media/5a5567_13767293ad5e4857b48f81a7f7fdf029~mv2.png/v1/fill/w_800,h_450,al_c,q_85,enc_auto/img.png" alt="" loading="lazy"></div><div class="body"><p class="eyebrow">Modding</p><h3>Terraria Modding (C#)</h3><p class="role">Sprite Art &amp; C#</p><p class="desc">The Froggerdinger Mod: a sword and 3 frog-themed items, made with the Rainy Lune plush brand.</p><div class="foot"><span>November 2023</span><span class="go" aria-hidden="true">→</span></div></div></a></li><li class="reveal" style="--d:80ms"><a class="ycard" href="miami-csdi-environment.html"><div class="media"><img src="https://static.wixstatic.com/media/5a5567_6b7774d957064928aa06ae109ead192c~mv2.jpg/v1/fill/w_800,h_450,al_c,q_85,enc_auto/img.jpg" alt="" loading="lazy"></div><div class="body"><p class="eyebrow">Environment recreation</p><h3>Miami CSDI Environment</h3><p class="role">3D Artist</p><p class="desc">A Maya recreation of Miami University&#x27;s Center for Student Diversity and Inclusion.</p><div class="foot"><span>Fall 2023</span><span class="go" aria-hidden="true">→</span></div></div></a></li><li class="reveal" style="--d:160ms"><div class="ycard"><div class="media"><img src="https://static.wixstatic.com/media/5a5567_727c256b8a8a46589ae8fae45d30895d~mv2.png/v1/fill/w_800,h_450,al_c,q_85,enc_auto/img.png" alt="" loading="lazy"></div><div class="body"><p class="eyebrow">School grant</p><h3>Project Civilia</h3><p class="role">Grant-funded game project</p><p class="desc">A grant-funded game project at Miami University.</p><div class="foot"><span>2023</span></div></div></div></li></ul></section><section aria-labelledby="year-2022"><div class="yhead"><h2 id="year-2022">2022</h2><span class="line"></span><span class="count">2 projects</span></div><ul class="ygrid"><li class="reveal" style="--d:0ms"><a class="ycard" href="the-company-state.html"><div class="media"><img src="https://static.wixstatic.com/media/5a5567_4ad7bf2cfdfa40f3bd536cfb113c0888~mv2.jpg/v1/fill/w_800,h_450,al_c,q_85,enc_auto/img.jpg" alt="" loading="lazy"></div><div class="body"><p class="eyebrow">Tabletop RPG</p><h3>The Company State</h3><p class="role">Writer &amp; Game Designer</p><p class="desc">A choose-your-own-adventure tabletop RPG set in a mega-capitalist dystopia.</p><div class="foot"><span>Fall 2022</span><span class="go" aria-hidden="true">→</span></div></div></a></li><li class="reveal" style="--d:80ms"><a class="ycard" href="the-compound.html"><div class="media"><img src="https://static.wixstatic.com/media/5a5567_6cb563a8bbe24e9fb11af1d536f46789~mv2.png/v1/fill/w_800,h_450,al_c,q_85,enc_auto/img.png" alt="" loading="lazy"></div><div class="body"><p class="eyebrow">Mission design</p><h3>The Compound</h3><p class="role">Narrative Director &amp; Level Designer</p><p class="desc">Orb Walker Mission 1B: a narrative mission with level flow and environmental storytelling.</p><div class="foot"><span>2022</span><span class="go" aria-hidden="true">→</span></div></div></a></li></ul></section><section aria-labelledby="year-2021"><div class="yhead"><h2 id="year-2021">2021</h2><span class="line"></span><span class="count">1 project</span></div><ul class="ygrid"><li class="reveal" style="--d:0ms"><div class="ycard"><div class="media"><img src="https://static.wixstatic.com/media/5a5567_e288a9c24b534de7a9fbeb46f89253cc~mv2.jpg/v1/fill/w_800,h_450,al_c,q_85,enc_auto/img.jpg" alt="" loading="lazy"></div><div class="body"><p class="eyebrow">Environment</p><h3>UE5 Horror Environment</h3><p class="role">Unreal Engine 5</p><p class="desc">A horror environment built in Unreal Engine 5.</p><div class="foot"><span>2021</span></div></div></div></li></ul></section></div>
+</div></main>
+<footer>
+  <div class="wrap foot">
+    <p>© <span id="yr">2026</span> Gus Kirkpatrick. All rights reserved.</p>
+    <ul>
+      <li><a href="../index.html#contact">Contact / Resume</a></li>
+      <li><a href="https://www.linkedin.com/in/gus-r-kirkpatrick-" target="_blank" rel="noopener">LinkedIn</a></li>
+      <li><a href="https://www.artstation.com/gus_kirkpatrick" target="_blank" rel="noopener">ArtStation</a></li>
+    </ul>
+  </div>
+</footer>
+<script>
+const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
+const mb = document.querySelector('.menu-btn'), nl = document.getElementById('navlinks');
+mb.addEventListener('click', () => { const o = nl.classList.toggle('open'); mb.setAttribute('aria-expanded', o); });
+document.getElementById('yr').textContent = new Date().getFullYear();
+document.querySelectorAll('img:not(.lightbox img)').forEach(img => img.addEventListener('error', () => { img.style.visibility = 'hidden'; }, { once: true }));
+/* lightbox */
+const lb = document.querySelector('.lightbox'); const lbImg = lb ? lb.querySelector('img') : null;
+document.querySelectorAll('[data-zoom] .z').forEach(z => {
+  const open = () => { const i = z.querySelector('img'); lbImg.style.visibility = 'visible'; lbImg.onerror = () => { lbImg.onerror = null; lbImg.src = i.currentSrc || i.src; }; lbImg.src = i.dataset.full || i.currentSrc || i.src; lbImg.alt = i.alt; lb.showModal(); };
+  z.addEventListener('click', open);
+  z.addEventListener('keydown', e => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); open(); } });
+});
+lb && lb.addEventListener('click', e => { if (e.target !== lbImg) lb.close(); });
+/* reveal */
+const io = new IntersectionObserver(es => es.forEach(en => { if (en.isIntersecting) { en.target.classList.add('is-visible'); io.unobserve(en.target); } }), { threshold: .1, rootMargin: '0px 0px -40px 0px' });
+document.querySelectorAll('.reveal').forEach(el => io.observe(el));
+</script>
+</body>
+</html>
