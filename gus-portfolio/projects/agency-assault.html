@@ -166,6 +166,9 @@ a.feature:hover .stat-badge img{transform:scale(1.05)}
 .card.is-hidden{display:none}
 
 .btn{display:inline-flex;align-items:center;justify-content:center;gap:.5rem;padding:.75rem 1.5rem;border-radius:999px;font-weight:500;transition:color .2s,background .2s,border-color .2s}
+.btn-lg{padding:1rem 2.25rem;font-size:1.125rem}
+.btn-lg svg{transition:transform .2s}
+.btn-lg:hover svg{transform:translateX(3px)}
 .btn-ghost{border:1px solid var(--border);color:var(--fg)}
 .btn-ghost:hover{border-color:var(--accent);color:var(--accent)}
 .btn-primary{background:var(--primary);color:var(--bg)}
@@ -202,6 +205,7 @@ a.feature:hover .stat-badge img{transform:scale(1.05)}
 .co[data-co="darpa"] .tile img{filter:brightness(2.1) saturate(1.6)}
 .co[data-co="darpa"]:hover .tile img{filter:brightness(2.1) saturate(1.6) drop-shadow(0 0 14px color-mix(in srgb,var(--glow) 70%,transparent)) drop-shadow(0 8px 24px color-mix(in srgb,var(--glow) 45%,transparent))}
 .co:hover .tile img{transform:translateY(-4px) scale(1.05);filter:drop-shadow(0 0 14px color-mix(in srgb,var(--glow,#a78bfa) 70%,transparent)) drop-shadow(0 8px 24px color-mix(in srgb,var(--glow,#a78bfa) 45%,transparent))}
+.co-link{display:block;color:inherit;text-decoration:none}
 .co b{display:block;margin-top:.5rem;font-family:var(--display);font-size:1.05rem;color:var(--fg)}
 .co small{display:block;margin-top:.15rem;font-size:.7rem;font-weight:500;letter-spacing:.1em;text-transform:uppercase;color:var(--accent)}
 @media (prefers-reduced-motion:reduce){.belt{overflow-x:auto}.track{animation:none}}
@@ -256,6 +260,23 @@ footer{margin-top:6rem;border-top:1px solid color-mix(in oklch,var(--border) 60%
 .panel img{width:100%;height:100%;object-fit:cover;filter:saturate(1.1);animation:drift 22s ease-in-out infinite alternate;animation-delay:calc(var(--i) * -7s)}
 @keyframes panelIn{from{opacity:0;transform:translateY(2.5rem) scale(1.04)}}
 @keyframes drift{from{transform:scale(1.04) translateX(-1%)}to{transform:scale(1.14) translate(1%,-2%)}}
+.hero-video{position:absolute;inset:0;overflow:hidden;container-type:size;pointer-events:none}
+.hero-video iframe{position:absolute;top:50%;left:50%;width:max(100cqw,177.78cqh);aspect-ratio:16/9;height:auto;border:0;transform:translate(-50%,-50%);opacity:0;transition:opacity 1s}
+.hero-video.ready iframe{opacity:1}
+.hero-credit{position:absolute;right:1rem;bottom:.75rem;z-index:2;font-size:.75rem;color:rgb(255 255 255/.6);text-decoration:none}
+.hero-credit:hover{color:#fff}
+.side-nav{position:fixed;top:50%;z-index:40;display:flex;align-items:center;gap:.75rem;transform:translateY(-50%);text-decoration:none;color:var(--fg)}
+.side-nav.sn-prev{left:1rem;flex-direction:row}
+.side-nav.sn-next{right:1rem;flex-direction:row-reverse}
+.side-nav .btn-circ{display:grid;place-items:center;width:3rem;height:3rem;flex-shrink:0;border-radius:999px;border:1px solid var(--border);background:color-mix(in oklch,var(--bg) 75%,transparent);backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px);transition:background .2s,border-color .2s,color .2s,transform .3s var(--ease)}
+.side-nav:hover .btn-circ,.side-nav:focus-visible .btn-circ{background:var(--primary);border-color:var(--primary);color:var(--bg)}
+.side-nav.sn-prev:hover .btn-circ{transform:translateX(-3px)}
+.side-nav.sn-next:hover .btn-circ{transform:translateX(3px)}
+.side-nav .peek{max-width:0;overflow:hidden;opacity:0;white-space:nowrap;padding:.55rem 0;border-radius:999px;background:color-mix(in oklch,var(--surface) 92%,transparent);border:1px solid transparent;backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px);transition:max-width .4s var(--ease),opacity .3s,padding .3s,border-color .3s}
+.side-nav:hover .peek,.side-nav:focus-visible .peek{max-width:22rem;opacity:1;padding:.55rem 1rem;border-color:var(--border)}
+.side-nav .peek small{display:block;font-size:.65rem;font-weight:600;letter-spacing:.12em;text-transform:uppercase;color:var(--primary)}
+.side-nav .peek b{display:block;font-family:var(--display);font-size:.95rem}
+@media(max-width:767px){.side-nav{top:auto;bottom:1rem;transform:none}.side-nav .peek{display:none}}
 .screentone{position:absolute;inset:0;mix-blend-mode:multiply;opacity:.55;background-image:radial-gradient(rgb(0 0 0/.55) 1px,transparent 1.4px);background-size:6px 6px}
 .hfade{position:absolute;inset:0 0 -1px;background:linear-gradient(to top,var(--bg) 10%,color-mix(in oklch,var(--bg) 75%,transparent),color-mix(in oklch,var(--bg) 10%,transparent))}
 .htop{position:absolute;inset:0 0 auto;height:7rem;background:linear-gradient(to bottom,color-mix(in oklch,var(--bg) 80%,transparent),transparent)}
@@ -304,6 +325,7 @@ dl.specs a:hover,.prose a:hover{text-decoration:underline}
 .prose li{position:relative;padding-left:1.5rem;color:var(--muted)}
 .prose li::before{content:"";position:absolute;left:.25rem;top:.62em;width:.45rem;height:.45rem;border-radius:2px;background:linear-gradient(135deg,var(--primary),var(--accent));transform:rotate(45deg)}
 .prose li strong{color:var(--fg);font-weight:600}
+.media-1 .z{width:100%}.media-1 img,.media-1 video{display:block;margin:0 auto;max-height:80vh;width:100%;object-fit:contain;border-radius:.75rem;background:var(--bg)}
 .media-1 img,.media-1 video{display:block;margin:0 auto;max-height:70vh;width:auto;max-width:100%;border-radius:.75rem}
 .media-2{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:1rem;align-items:start}
 .media-2 img,.media-2 video{width:100%;border-radius:.75rem}
@@ -392,6 +414,7 @@ html:has(.lightbox[open]){overflow:hidden}
   <div class="center"><a href="index.html" class="btn btn-ghost">See all projects</a></div>
 </section>
 </article></main>
+<a class="side-nav sn-prev" href="pubg-mobile.html" aria-label="Previous project: PUBG Mobile: Snipers vs Runners"><span class="btn-circ"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M19 12H5M11 18l-6-6 6-6"/></svg></span><span class="peek"><small>Previous</small><b>PUBG Mobile: Snipers vs Runners</b></span></a><a class="side-nav sn-next" href="uefn-freelance.html" aria-label="Next project: UEFN Freelance Work &amp; QA"><span class="btn-circ"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span><span class="peek"><small>Next</small><b>UEFN Freelance Work &amp; QA</b></span></a><script>addEventListener("keydown",e=>{if(e.target.closest("input,textarea,[contenteditable]")||e.metaKey||e.ctrlKey||e.altKey)return;if(document.querySelector(".lightbox[open]"))return;const a=e.key==="ArrowLeft"?document.querySelector(".side-nav.sn-prev"):e.key==="ArrowRight"?document.querySelector(".side-nav.sn-next"):null;if(a)location.href=a.href;});</script>
 <footer>
   <div class="wrap foot">
     <p>© <span id="yr">2026</span> Gus Kirkpatrick. All rights reserved.</p>
@@ -420,5 +443,6 @@ lb.addEventListener('click', e => { if (e.target !== lbImg) lb.close(); });
 const io = new IntersectionObserver(es => es.forEach(en => { if (en.isIntersecting) { en.target.classList.add('is-visible'); io.unobserve(en.target); } }), { threshold: .1, rootMargin: '0px 0px -40px 0px' });
 document.querySelectorAll('.reveal').forEach(el => io.observe(el));
 </script>
+
 </body>
 </html>
